@@ -8,13 +8,7 @@ class CartItemList extends Component {
     const { cartItems } = this.props
     console.log(cartItems)
     return (
-      <Box
-        pad="small"
-        direction="row"
-        fill
-        wrap
-        overflow="auto"
-      >
+      <Box pad="small">
         {
           cartItems.map((product) => (
             <CartItem {...product} />
