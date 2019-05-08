@@ -1,33 +1,25 @@
 import React, { Component } from 'react';
-import { Box, Button } from 'grommet';
+import { Box } from 'grommet';
 import { connect } from 'react-redux';
-import { Close } from 'grommet-icons';
+import CartItem from './CartItem';
 
 class CartItemList extends Component {
-  handleDeleteToCart = (id) => {
-    console.log('Delete to cart')
-    console.log(id)
-    const {
-      deleteItemAsync
-    } = this.props;
-    deleteItemAsync(id);
-  }
   render() {
-    const {
-      cartItems
-    } = this.props
+    const { cartItems } = this.props
+    console.log(cartItems)
     return (
-      <Box pad="small">
-        {cartItems.map(item => (
-          <Box direction="row" pad="small">
-            <Box pad="small">
-              {item.name} x {item.amount}
-            </Box>
-            <Box pad="small">
-              <Button icon={<Close />} pad="small" margin="small" onClick={this.handleDeleteToCart(item.id)}></Button>
-            </Box>
-          </Box>
-        ))}
+      <Box
+        pad="small"
+        direction="row"
+        fill
+        wrap
+        overflow="auto"
+      >
+        {
+          cartItems.map((product) => (
+            <CartItem {...product} />
+          ))
+        }
       </Box>
     )
   }
@@ -37,9 +29,4 @@ const mapStateToProps = state => {
     cartItems: state.cart.cartItems,
   }
 }
-const mapDispatchToProps = dispatch => {
-  return {
-    deleteItemAsync: dispatch.cart.deleteItemAsync
-  }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(CartItemList)
+export default connect(mapStateToProps)(CartItemList)
