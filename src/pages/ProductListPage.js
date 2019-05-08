@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Box, TextInput } from 'grommet'
-import ProductList from '../components/ProductList'
-import { connect } from 'react-redux'
+import { Box, TextInput } from 'grommet';
+import ProductList from '../components/ProductList';
+import { connect } from 'react-redux';
 
 class ProductListPage extends Component {
   componentDidMount() {

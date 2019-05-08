@@ -44,6 +44,12 @@ export const cart = {
       console.log(res.data);
       dispatch.cart.getCartItemsAsync()
     },
+    async deleteItemAsync(id) {
+      console.log(id);
+      const res = await request.delete('carts/123456/items/' + id);
+      console.log(res.data);
+      dispatch.cart.getCartItemsAsync()
+    },
     async getCartItemsAsync() {
       const res = await request.get('/carts/123456/items');
       console.log(res.data);
