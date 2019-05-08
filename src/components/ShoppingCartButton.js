@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
-import { DropButton, Box, Stack } from 'grommet';
-import { FaShoppingBag } from 'react-icons/fa'
-import { connect } from 'react-redux'
-
+import { DropButton, Box, Stack, Button } from 'grommet';
+import { withRouter } from "react-router-dom";
+import { Shop } from 'grommet-icons'
+import { connect } from 'react-redux';
+import CartItemList from './CartItemList';
 class ShoppingCartButton extends Component {
   render() {
-    const {cartLength} = this.props;
+    const {
+      cartLength
+    } = this.props;
     return (
       <DropButton
         dropAlign={{
@@ -13,18 +16,27 @@ class ShoppingCartButton extends Component {
           right: 'right'
         }}
         dropContent={
-          <Box>Cart product list</Box>
+          <Box>
+            <CartItemList />
+            <Box pad="small">
+              <Button
+                primary
+                onClick={() => this.props.history.push('/checkout')}>
+                Checkout
+              </Button>
+            </Box>
+          </Box>
         }
       >
         <Stack
           anchor="top-right"
         >
           <Box pad='xsmall'>
-            <FaShoppingBag size={32}/>
+            <Shop size="32px" />
           </Box>
           <Box
             background="accent-1"
-            pad={{horizontal: 'xsmall'}}
+            pad={{ horizontal: 'xsmall' }}
             round
           >
             {cartLength}
@@ -34,10 +46,9 @@ class ShoppingCartButton extends Component {
     )
   }
 }
-
 const mapStateToProps = state => {
   return {
     cartLength: state.cart.cartItems.length
   }
 }
-export default connect(mapStateToProps)(ShoppingCartButton)
+export default connect(mapStateToProps) (withRouter(ShoppingCartButton))

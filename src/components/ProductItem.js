@@ -7,13 +7,17 @@ import {
   Stack,
   Button,
 } from 'grommet'
+import { Shop } from 'grommet-icons'
 import { connect } from 'react-redux'
 
 class ProductItem extends React.Component {
   handleAddToCart = () => {
     console.log('Add to cart')
-    const {addItem, id} = this.props;
-    addItem(id);
+    const {
+      addItemAsync,
+      id
+    } = this.props;
+    addItemAsync(id);
   }
   render() {
     const { name, description, image, price } = this.props
@@ -34,13 +38,13 @@ class ProductItem extends React.Component {
           </Stack>
         </Box>
         <Box align="center">
-          <Heading textAlign="center" level={4} margin={{ vertical: 'xsmall' }}>
+          <Heading textAlign="center" level={4} margin={{vertical: 'xsmall'}}>
             {name}
           </Heading>
           <Text textAlign="center">
             {description}
           </Text>
-          <Button primary pad="small" margin="small" label="Add to cart" onClick={this.handleAddToCart} />
+          <Button primary pad="small" margin="small" icon={<Shop />} label="Add to cart" onClick={this.handleAddToCart}/>
         </Box>
       </Box>
     )
@@ -48,13 +52,14 @@ class ProductItem extends React.Component {
 }
 
 const mapStateToProps = state => {
+  console.log(state)
   return {
-    state: state
+    state
   }
 }
 const mapDispatchToProps = dispatch => {
   return {
-    addItem: dispatch.cart.addItem
+    addItemAsync: dispatch.cart.addItemAsync
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ProductItem)
