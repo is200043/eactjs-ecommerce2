@@ -13,15 +13,16 @@ class CartItem extends Component {
         deleteItemAsync(id);
     }
     render() {
-        const { name, amount, id } = this.props
+        const { name, amount } = this.props
         return (
-            <Box direction="row" pad="small">
+            <Box direction="row" pad="small" border="bottom">
                 <Box pad="small">
                     {name} x {amount}
                 </Box>
-                <Box pad="small">
-                    <Button icon={<Close />} pad="small" margin="small" onClick={this.handleDeleteToCart}></Button>
-                </Box>
+                <Button
+                    icon={<Close />}
+                    pad="small"
+                    onClick={this.handleDeleteToCart}></Button>
             </Box>
         )
     }
